@@ -1,3 +1,5 @@
 from django.contrib import admin
+from recipes.models import Recipe, User
 
-# Register your models here.
+admin.site.register(User)
+admin.site.register(Recipe)

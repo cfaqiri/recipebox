@@ -1,0 +1,36 @@
+{% extends "recipes/layout.html" %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="input_username" class="form-label">Username</label>
+            <input autofocus type="text" class="form-control" id="input_username" name="username">
+        </div>
+
+        <div class="mb-3">
+            <label for="input_email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="input_email" name="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="input_password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="input_password" name="password">
+        </div>
+
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirmation">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button> 
+
+    </form>
+{% endblock %}

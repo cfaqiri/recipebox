@@ -1,0 +1,14 @@
+{% extends "recipes/layout.html" %}
+
+{% block body %}
+    <h1>My Recipes</h1>
+    {% for recipe in recipes %}
+        <div>
+            <a href="{{ recipe.url }}">{{ recipe.title }}</a>
+        </div>
+    {% empty %}
+        <div>
+            You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
+        </div>
+    {% endfor %}
+{% endblock %}
