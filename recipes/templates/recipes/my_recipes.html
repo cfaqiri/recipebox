@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>My Recipes</h1>
-    {% for recipe in recipes %}
+    {% for recipe in page_obj %}
         <div>
             <a href="{{ recipe.url }}">{{ recipe.title }}</a>
         </div>
@@ -11,4 +11,15 @@
             You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
         </div>
     {% endfor %}
+
+    {% if page_obj.has_previous %}
+        <div>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        </div>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <div>
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+        </div>
+    {% endif %}
 {% endblock %}

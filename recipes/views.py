@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -75,6 +76,9 @@ def add_recipe(request):
 @login_required
 def my_recipes(request, user_id):
     recipes = Recipe.objects.filter(user_id=user_id).order_by("title")
+    paginator = Paginator(recipes, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "recipes/my_recipes.html", {
-        "recipes": recipes
+        "page_obj": page_obj
     })
