@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-aj*8lx&a4qk=q*^5j0)dj6jwuwtq@92a039ug=l2y8)cao2!z#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['myrecipeboxapp.herokuapp.com']
 
 
 # Application definition
