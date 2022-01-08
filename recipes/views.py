@@ -58,6 +58,7 @@ def register(request):
     return render(request, "recipes/register.html")
 
 
+
 def add_recipe(request):
     if request.method == "POST":
         f = RecipeForm(request.POST)
