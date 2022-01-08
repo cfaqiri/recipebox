@@ -66,6 +66,7 @@ def add_recipe(request):
             new_recipe.user = User.objects.get(id=request.user.id)
         # I need to find a way for this NOT to be null, but for the form to still go through.
             new_recipe.save()
+            return HttpResponseRedirect(reverse("my_recipes", args=[request.user.id]))
 
     recipe_form = RecipeForm()
     return render(request, "recipes/add_recipe.html", {
