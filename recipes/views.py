@@ -11,8 +11,7 @@ from recipes.forms import RecipeForm
 from recipes.models import Recipe, User
 
 def index(request):
-    return HttpResponse(int(os.environ.get('HELLO')))
-    # return render(request, "recipes/index.html")
+    return render(request, "recipes/index.html")
 
 
 def login_view(request):
@@ -24,6 +23,7 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
+            # Change this
             return HttpResponse("you don't even exist")
     
     return render(request, "recipes/login.html")
