@@ -11,7 +11,7 @@ from recipes.forms import RecipeForm
 from recipes.models import Recipe, User
 
 def index(request):
-    return HttpResponse(os.environ.get('HELLO'))
+    return HttpResponse(int(os.environ.get('HELLO')))
     # return render(request, "recipes/index.html")
 
 
