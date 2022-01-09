@@ -84,3 +84,19 @@ def my_recipes(request, user_id):
     return render(request, "recipes/my_recipes.html", {
         "page_obj": page_obj
     })
+
+
+@login_required
+def search(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        recipes = Recipe.objects.all()
+        filtered_recipes = []
+        for recipe in recipes:
+            if search.lower() in recipe.title.lower():
+                filtered_recipes.append(recipe)
+        paginator = Paginator(filtered_recipes, 4)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        # Maybe change this to be rendered by Javascript
+        return render(request, "recipes/my_recipes.html", {"page_obj": page_obj})

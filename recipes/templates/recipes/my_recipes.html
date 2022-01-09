@@ -1,25 +1,56 @@
 {% extends "recipes/layout.html" %}
 
 {% block body %}
-    <h1>My Recipes</h1>
-    {% for recipe in page_obj %}
-        <div>
-            <a href="{{ recipe.url }}">{{ recipe.title }}</a>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>My Recipes</h1>
+            </div>
         </div>
-    {% empty %}
-        <div>
-            You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
+    </div>    
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form class="d-flex" action="{% url 'search' %}" method="post">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+ 
         </div>
-    {% endfor %}
-
-    {% if page_obj.has_previous %}
-        <div>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        </div>
-    {% endif %}
-    {% if page_obj.has_next %}
-        <div>
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-        </div>
-    {% endif %}
+    </div>
+    <div class="container">
+        {% for recipe in page_obj %}
+            <div class="row">
+                <div class="col recipe">
+                    <a class="recipe" href="{{ recipe.url }}">{{ recipe.title }}</a>
+                </div>
+            </div>
+        {% empty %}
+            <div>
+                You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+      </div>
 {% endblock %}
