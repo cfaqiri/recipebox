@@ -11,8 +11,7 @@ from recipes.forms import RecipeForm
 from recipes.models import Recipe, User
 
 def index(request):
-    return HttpResponse(os.environ.get('EMAIL_HOST_USER'))
-    #return render(request, "recipes/index.html")
+    return render(request, "recipes/index.html")
 
 
 def login_view(request):
