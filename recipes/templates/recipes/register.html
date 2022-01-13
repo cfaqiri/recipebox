@@ -3,15 +3,6 @@
 
 {% block body %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
 <div class="container">
     <h1>Register</h1>
     <form method="post">
