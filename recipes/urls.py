@@ -9,7 +9,7 @@ urlpatterns = []
 urlpatterns = [
     path("", views.index, name="index"),
     path("login/",
-        auth_views.LoginView.as_view(template_name="recipes/login.html"), 
+        auth_views.LoginView.as_view(template_name="recipes/login.html", redirect_authenticated_user=True), 
         name="login"),
 
     path("logout/", views.logout_view, name="logout"),

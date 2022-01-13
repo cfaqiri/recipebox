@@ -7,9 +7,14 @@ from recipes.models import Recipe, User
 
 class CustomUserCreationForm(UserCreationForm):
 
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        # Making email required
+        self.fields['email'].required = True
+
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields
+        fields = UserCreationForm.Meta.fields + ('email',)
 
 
 class RecipeForm(ModelForm):

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from recipes.forms import CustomUserCreationForm, RecipeForm
@@ -40,6 +40,8 @@ def logout_view(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("index")
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
