@@ -16,6 +16,14 @@ User = get_user_model()
 
 
 def index(request):
+    if request.user.is_authenticated:
+        recipes = Recipe.objects.filter(user_id=request.user.id).order_by("title")
+        paginator = Paginator(recipes, 25)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "recipes/index.html", {
+        "page_obj": page_obj
+    })
     return render(request, "recipes/index.html")
 
 
