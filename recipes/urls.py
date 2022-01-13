@@ -3,9 +3,15 @@ from django.urls import path
 
 from recipes import views
 
+urlpatterns = []
+
+
 urlpatterns = [
     path("", views.index, name="index"),
-    path("login/", views.login_view, name="login"),
+    path("login/",
+        auth_views.LoginView.as_view(template_name="recipes/login.html"), 
+        name="login"),
+
     path("logout/", views.logout_view, name="logout"),
     path("register/", views.register, name="register"),
     path("add/", views.add_recipe, name="add_recipe"),

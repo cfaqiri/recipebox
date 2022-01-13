@@ -1,40 +1,24 @@
 {% extends "recipes/layout.html" %}
+{% load crispy_forms_tags %}
 
 {% block body %}
-    <div class="container">
-        <h1>Register</h1>
-    </div>
 
-    {% if message %}
-        <div>{{ message }}</div>
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
     {% endif %}
+{% endif %}
 
-    <div class="container">
-        <form action="{% url 'register' %}" method="post">
-            {% csrf_token %}
+<div class="container">
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-primary" value="Register">
+    </form>
+</div>
 
-            <div class="mb-3">
-                <label for="input_username" class="form-label">Username</label>
-                <input autofocus type="text" class="form-control" id="input_username" name="username">
-            </div>
-
-            <div class="mb-3">
-                <label for="input_email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="input_email" name="email">
-            </div>
-
-            <div class="mb-3">
-                <label for="input_password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="input_password" name="password">
-            </div>
-
-            <div class="mb-3">
-                <label for="confirm_password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm_password" name="confirmation">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button> 
-
-        </form>
-    </div>
 {% endblock %}

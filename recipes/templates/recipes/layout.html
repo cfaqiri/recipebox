@@ -64,6 +64,11 @@
 
 
     <div class="body">
+      {% if messages %}
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+      {% endif %}
       {% block body %}
       {% endblock %}
       <!-- Option 1: Bootstrap Bundle with Popper -->
