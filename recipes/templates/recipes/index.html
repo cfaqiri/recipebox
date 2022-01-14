@@ -20,7 +20,7 @@
                 </div>
             </div>
         {% empty %}
-            <div>
+            <div class="no_recipes">
                 You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
             </div>
         {% endfor %}

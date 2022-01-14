@@ -72,9 +72,8 @@ def add_recipe(request):
         if f.is_valid():
             new_recipe = f.save(commit=False)
             new_recipe.user = User.objects.get(id=request.user.id)
-        # I need to find a way for this NOT to be null, but for the form to still go through.
             new_recipe.save()
-            return HttpResponseRedirect(reverse("my_recipes", args=[request.user.id]))
+            return redirect("index")
 
     recipe_form = RecipeForm()
     return render(request, "recipes/add_recipe.html", {
@@ -107,3 +106,10 @@ def search(request):
         page_obj = paginator.get_page(page_number)
         # Maybe change this to be rendered by Javascript
         return render(request, "recipes/my_recipes.html", {"page_obj": page_obj})
+
+def test(request):
+    return render(request, "recipes/test.html")
+
+
+def profile(request):
+    return render(request, "recipes/profile.html")

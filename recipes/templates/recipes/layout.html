@@ -35,7 +35,7 @@
                   {{ user.username }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                 </ul>
@@ -64,11 +64,6 @@
 
 
     <div class="body">
-      {% if messages %}
-        {% for message in messages %}
-          {{ message }}
-        {% endfor %}
-      {% endif %}
       {% block body %}
       {% endblock %}
       <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -8,7 +8,7 @@ class User(AbstractUser):
 
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=60)
     url = models.URLField()
 
     def __str__(self):
