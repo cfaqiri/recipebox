@@ -1,0 +1,13 @@
+{% extends "recipes/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container">
+    <h1>Change Email</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+{% endblock %}

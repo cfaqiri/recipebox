@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from recipes.forms import CustomUserCreationForm, RecipeForm
+from recipes.forms import CustomUserCreationForm, EmailForm, RecipeForm
 from recipes.models import Recipe, User
 
 
@@ -113,3 +113,19 @@ def test(request):
 
 def profile(request):
     return render(request, "recipes/profile.html")
+
+
+def email_change(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            user = User.objects.get(id=request.user.id)
+            user.email = email
+            user.save()
+            return HttpResponse(user.email)
+
+    else:
+        form = EmailForm()
+
+    return render(request, "recipes/change_email.html", {"form": form})

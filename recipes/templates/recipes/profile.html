@@ -19,14 +19,18 @@
                 <strong>Email</strong>
             </td>
             <td>{{ user.email }}</td>
-            <td>Maybe change</td>
+            <td>
+                <a href="{% url 'email_change' %}">Edit</a>
+            </td>
         </tr>
         <tr>
             <td>
                 <strong>Password</strong>
             </td>
             <td>********</td>
-            <td>Maybe change</td>
+            <td>
+                <a href="{% url 'password_change' %}">Edit</a>
+            </td>
         </tr>
         </tbody>
     </table>

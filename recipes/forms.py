@@ -26,3 +26,11 @@ class RecipeForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({"class": "form-control", "autofocus": "autofocus"})
         self.fields['url'].widget.attrs.update({"class": "form-control"})
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({"class": "form-control", "autofocus": "autofocus"})

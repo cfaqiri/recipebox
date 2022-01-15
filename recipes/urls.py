@@ -35,6 +35,7 @@ urlpatterns = [
     path("password_change_done/",
         auth_views.PasswordChangeDoneView.as_view(template_name="recipes/password_change_done.html"),
         name="password_change_done"),
+    path("email_change/", views.email_change, name="email_change"),
     
     path("test", views.test, name="test"),
     path("profile/", views.profile, name="profile"),
