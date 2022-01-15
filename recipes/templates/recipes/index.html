@@ -4,48 +4,60 @@
 
 {% if user.is_authenticated %}
 
-    <div class="container">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>My Recipes</h1>
+        </div>
+    </div>
+</div>    
+
+<div class="container">
+    {% for recipe in page_obj %}
         <div class="row">
-            <div class="col">
-                <h1>My Recipes</h1>
+            <div class="col recipe">
+                <a class="recipe" href="{{ recipe.url }}">{{ recipe.title }}</a>
             </div>
         </div>
-    </div>    
-    
-    <div class="container">
-        {% for recipe in page_obj %}
-            <div class="row">
-                <div class="col recipe">
-                    <a class="recipe" href="{{ recipe.url }}">{{ recipe.title }}</a>
-                </div>
-            </div>
-        {% empty %}
-            <div class="no_recipes">
-                You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
-            </div>
-        {% endfor %}
+    {% empty %}
+        <div class="no_recipes">
+            You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
+        </div>
+    {% endfor %}
+</div>
+<div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+        </ul>
+    </nav>
     </div>
-    <div class="container">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-            </ul>
-        </nav>
-      </div>
+
 {% else %}
-      Hey this is what we're all about.
+
+<div class="container">
+    <h1>Welcome to RecipeBox!</h1>
+    <p>This is a simple recipe storage webapp for anyone who loves finding new recipes online and needs a place to store them.</p>
+    <p>
+        <a href="{% url 'register' %}">Register</a> today and start saving your favourite recipes.
+    </p>
+    <br>
+    <hr>
+    <p>This site was created with love by Crystal Faqiri as the final project for CS50’s Web Programming with Python and JavaScript</p>
+</div>  
+
 {% endif %}
 {% endblock %}
