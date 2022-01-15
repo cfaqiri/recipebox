@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
@@ -112,7 +112,8 @@ def test(request):
 
 
 def profile(request):
-    return render(request, "recipes/profile.html")
+    form = EmailForm()
+    return render(request, "recipes/profile.html", {"form": form})
 
 
 def email_change(request):
@@ -129,3 +130,7 @@ def email_change(request):
         form = EmailForm()
 
     return render(request, "recipes/change_email.html", {"form": form})
+
+
+def get_recipes(request):
+    pass

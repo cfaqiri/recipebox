@@ -48,15 +48,13 @@
 
 {% else %}
 
-<div class="container">
+<div class="container-fluid">
     <h1>Welcome to RecipeBox!</h1>
-    <p>This is a simple recipe storage webapp for anyone who loves finding new recipes online and needs a place to store them.</p>
+    <hr>
+    <p>This is a simple recipe storage webapp for anyone who loves finding new recipes online and needs a place to store the URLs.</p>
     <p>
         <a href="{% url 'register' %}">Register</a> today and start saving your favourite recipes.
     </p>
-    <br>
-    <hr>
-    <p>This site was created with love by Crystal Faqiri as the final project for CS50’s Web Programming with Python and JavaScript</p>
 </div>  
 
 {% endif %}

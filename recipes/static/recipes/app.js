@@ -1,3 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // alert("yoink");
-})
+    document.addEventListener('click', function(e) {
+        if(e.target.id === 'email_change') {
+            console.log(e.target.id)
+        }
+    });
+});

@@ -1,4 +1,5 @@
 {% extends "recipes/layout.html" %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <div class="container">
@@ -20,7 +21,7 @@
             </td>
             <td>{{ user.email }}</td>
             <td>
-                <a href="{% url 'email_change' %}">Edit</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
             </td>
         </tr>
         <tr>
@@ -35,5 +36,29 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Email</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" id="email_change" value="Save">       
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
