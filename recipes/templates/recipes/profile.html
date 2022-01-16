@@ -3,6 +3,9 @@
 
 {% block body %}
 <div class="container">
+    {% if message %}
+        {{ message }}
+    {% endif %}
     <h1>My Profile</h1>
 </div>
 <div class="container">
@@ -50,12 +53,12 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    <input type="submit" class="btn btn-primary" id="email_change" value="Save"> 
                 </form>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary" id="email_change" value="Save">       
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>      
         </div>
       </div>
     </div>

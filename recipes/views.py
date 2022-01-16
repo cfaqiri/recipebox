@@ -112,7 +112,17 @@ def test(request):
 
 
 def profile(request):
-    form = EmailForm()
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            user = User.objects.get(id=request.user.id)
+            user.email = email
+            user.save()
+            return HttpResponseRedirect(reverse('profile'))
+
+    else:
+        form = EmailForm()
     return render(request, "recipes/profile.html", {"form": form})
 
 
