@@ -1,12 +1,14 @@
 import os
 from django.core.paginator import Paginator
+from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from recipes.forms import CustomUserCreationForm, EmailForm, RecipeForm
 from recipes.models import Recipe, User
@@ -119,7 +121,8 @@ def profile(request):
             user = User.objects.get(id=request.user.id)
             user.email = email
             user.save()
-            return HttpResponseRedirect(reverse('profile'))
+            messages.success(request, "Your email has been changed!")
+            return redirect("profile")
 
     else:
         form = EmailForm()
@@ -144,3 +147,15 @@ def email_change(request):
 
 def get_recipes(request):
     pass
+
+
+class CustomPasswordChangeView(PasswordChangeView):
+    # Optional (default: 'registration/password_change_form.html')
+    template_name = 'recipes/password_change.html'
+    # Optional (default: `reverse_lazy('password_change_done')`)
+    success_url = reverse_lazy('profile')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your password has been changed!')
+        # Understand what this is doing??
+        return super().form_valid(form)

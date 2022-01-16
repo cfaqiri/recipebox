@@ -3,10 +3,12 @@
 
 {% block body %}
 <div class="container">
-    {% if message %}
-        {{ message }}
-    {% endif %}
     <h1>My Profile</h1>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
 </div>
 <div class="container">
     <table class="table">

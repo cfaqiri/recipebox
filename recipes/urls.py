@@ -30,7 +30,7 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(template_name="recipes/password_reset_complete.html"),
         name="password_reset_complete"),
     path("password_change/",
-        auth_views.PasswordChangeView.as_view(template_name="recipes/password_change.html"),
+        views.CustomPasswordChangeView.as_view(),
         name="password_change"),
     path("password_change_done/",
         auth_views.PasswordChangeDoneView.as_view(template_name="recipes/password_change_done.html"),
