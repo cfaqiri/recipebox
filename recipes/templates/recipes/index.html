@@ -5,27 +5,33 @@
 {% if user.is_authenticated %}
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1>My Recipes</h1>
-        </div>
-    </div>
-</div>    
+    <h1 class="my_recipes_title">My Recipes</h1>
+</div>
+<br>
 
 <div class="container">
-    {% for recipe in page_obj %}
-        <div class="row">
-            <div class="col recipe">
-                <a class="recipe" href="{{ recipe.url }}">{{ recipe.title }}</a>
-            </div>
-        </div>
-    {% empty %}
-        <div class="no_recipes">
-            You haven't saved any recipes yet! Click <a style="text-decoration: none;" href="{% url 'add_recipe' %}">here</a> to add one.
-        </div>
-    {% endfor %}
+<table class="table align-middle">
+    <tbody>
+        <tr>
+        {% for recipe in page_obj %}
+          {% if forloop.counter|divisibleby:3 %}
+            <td id="recipe_{{ recipe.id }}" class="recipe_index">
+                <a href="{% url 'recipe_details' recipe.id %}">{{ recipe.title }}</a>
+            </td>
+            </tr>
+        <tr>
+          {% else %}
+          <td id="recipe_{{ recipe.id }}" class="recipe_index">
+            <a href="{% url 'recipe_details' recipe.id %}">{{ recipe.title }}</a>
+            </td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
 </div>
-<div class="container">
+
+  <div class="container">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
         {% if page_obj.has_previous %}
@@ -44,7 +50,7 @@
         {% endif %}
         </ul>
     </nav>
-    </div>
+</div>
 
 {% else %}
 

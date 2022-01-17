@@ -20,28 +20,13 @@ User = get_user_model()
 def index(request):
     if request.user.is_authenticated:
         recipes = Recipe.objects.filter(user_id=request.user.id).order_by("title")
-        paginator = Paginator(recipes, 25)
+        paginator = Paginator(recipes, 36)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, "recipes/index.html", {
         "page_obj": page_obj
     })
     return render(request, "recipes/index.html")
-
-
-# def login_view(request):
-#     if request.method == "POST":
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return HttpResponseRedirect(reverse("index"))
-#         else:
-#             # Change this
-#             return HttpResponse("you don't even exist")
-    
-#     return render(request, "recipes/login.html")
 
 
 def logout_view(request):
@@ -149,6 +134,8 @@ def get_recipes(request):
     pass
 
 
+## Understand this thinggggg
+
 class CustomPasswordChangeView(PasswordChangeView):
     # Optional (default: 'registration/password_change_form.html')
     template_name = 'recipes/password_change.html'
@@ -159,3 +146,8 @@ class CustomPasswordChangeView(PasswordChangeView):
         messages.success(self.request, 'Your password has been changed!')
         # Understand what this is doing??
         return super().form_valid(form)
+
+
+def recipe_details(request, id):
+    recipe = Recipe.objects.get(id=id)
+    return render(request, "recipes/recipe_details.html", {"recipe": recipe})

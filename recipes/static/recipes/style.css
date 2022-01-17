@@ -30,3 +30,23 @@ a {
 .no_recipes {
     text-align: center;
 }
+
+td {
+
+    /* css-3 */ 
+    word-wrap: break-word;
+}
+
+
+.my_recipes_title {
+    text-align: center;
+}
+
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+a {
+    word-wrap: break-word;
+  }

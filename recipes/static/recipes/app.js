@@ -1,13 +1,9 @@
-// document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     
-//     document.addEventListener('click', function(e) {
-//         if(e.target.id === 'email_change') {
-//             console.log(e.target.id)
-//         }
-//     });
+    document.addEventListener('mouseover', function(e) {
+        if(e.target.className === 'recipe_index') {
+            console.log("it's workin!");
+        }
+    });
 
-//     $('#exampleModal').on('hidden.bs.modal', function () {
-//         location.reload();
-//        })    
-
-// });
+});
