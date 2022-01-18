@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    document.addEventListener('mouseover', function(e) {
-        if(e.target.className === 'recipe_index') {
-            console.log("it's workin!");
+    document.addEventListener('click', function(e) {
+        if(e.target.id === 'delete_recipe_2') {
+            // let myModalEl = document.getElementById('deleteModal');
+            // let modal = bootstrap.Modal.getInstance(myModalEl);
+            // modal.hide();
+            // console.log('good time to fetch');
+
         }
     });
 

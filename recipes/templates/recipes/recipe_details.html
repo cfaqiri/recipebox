@@ -3,9 +3,73 @@
 
 {% block body %}
 <div class="container">
-    <h1>{{ recipe.title }}</h1>
-    <div>
-        <a href="{{ recipe.url }}">{{ recipe.url }}</a>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
     </div>
+    {% endfor %}
+    <div class="recipe_details">
+        <h1 id="recipe_title" data-id="{{ recipe.id }}">{{ recipe.title }}</h1>
+        <div>
+            <a href="{{ recipe.url }}" id="recipe_url">{{ recipe.url }}</a>
+        </div>
+    </div>  
 </div>
+<br>
+<div class="container" id="recipe_buttons">
+    <button type="button" class="btn btn-primary" id="edit_recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="bi bi-pencil-square"></i>
+        Edit
+    </button>
+    <button type="button" class="btn btn-danger" id="delete_recipe" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <i class="bi bi-trash"></i>
+        Delete
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Recipe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ recipe_form|crispy }}
+                    <input type="submit" class="btn btn-primary" id="email_change" value="Save"> 
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Edit Recipe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <h4>Are you sure you want to delete?</h4>
+                <br>
+                <div>
+                    <form action="{% url 'delete_recipe' recipe.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" id="delete_recipe_2">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

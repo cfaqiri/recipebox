@@ -110,8 +110,10 @@ def profile(request):
             return redirect("profile")
 
     else:
-        form = EmailForm()
-    return render(request, "recipes/profile.html", {"form": form})
+        form = EmailForm(initial={"email": request.user.email})
+    return render(request, "recipes/profile.html", {
+        "form": form
+        })
 
 
 def email_change(request):
@@ -149,5 +151,27 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 
 def recipe_details(request, id):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            url = form.cleaned_data["url"]
+            recipe = Recipe.objects.get(id=id)
+            recipe.title = title
+            recipe.url = url
+            recipe.save()
+            messages.success(request, "Your recipe has been changed!")
+            return HttpResponseRedirect(reverse("recipe_details", args=[id]))
     recipe = Recipe.objects.get(id=id)
-    return render(request, "recipes/recipe_details.html", {"recipe": recipe})
+    recipe_form = RecipeForm(initial={"title": recipe.title, "url": recipe.url})
+    return render(request, "recipes/recipe_details.html", {
+        "recipe": recipe,
+        "recipe_form": recipe_form
+        })
+
+
+def delete_recipe(request, id):
+    recipe = Recipe.objects.get(id=id)
+    recipe.delete()
+    messages.info(request, f"Your recipe, {recipe.title}, has been deleted.")
+    return redirect("index")

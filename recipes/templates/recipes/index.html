@@ -6,6 +6,11 @@
 
 <div class="container">
     <h1 class="my_recipes_title">My Recipes</h1>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
 </div>
 <br>
 
@@ -15,13 +20,13 @@
         <tr>
         {% for recipe in page_obj %}
           {% if forloop.counter|divisibleby:3 %}
-            <td id="recipe_{{ recipe.id }}" class="recipe_index">
+            <td data-id="recipe_{{ recipe.id }}" class="recipe_index">
                 <a href="{% url 'recipe_details' recipe.id %}">{{ recipe.title }}</a>
             </td>
             </tr>
         <tr>
           {% else %}
-          <td id="recipe_{{ recipe.id }}" class="recipe_index">
+          <td data-id="recipe_{{ recipe.id }}" class="recipe_index">
             <a href="{% url 'recipe_details' recipe.id %}">{{ recipe.title }}</a>
             </td>
           {% endif %}

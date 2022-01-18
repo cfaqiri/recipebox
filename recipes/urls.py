@@ -39,5 +39,6 @@ urlpatterns = [
     
     path("test", views.test, name="test"),
     path("profile/", views.profile, name="profile"),
-    path("recipe_details/<int:id>/", views.recipe_details, name="recipe_details")
+    path("recipe_details/<int:id>/", views.recipe_details, name="recipe_details"),
+    path("recipe_delete/<int:id>/", views.delete_recipe, name="delete_recipe")
 ]
