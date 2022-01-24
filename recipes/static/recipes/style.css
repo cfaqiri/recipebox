@@ -50,3 +50,7 @@ table {
 a {
     word-wrap: break-word;
   }
+
+#back_to_recipes {
+    margin-top: 20px;
+}

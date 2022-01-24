@@ -37,8 +37,8 @@ urlpatterns = [
         name="password_change_done"),
     path("email_change/", views.email_change, name="email_change"),
     
-    path("test", views.test, name="test"),
     path("profile/", views.profile, name="profile"),
     path("recipe_details/<int:id>/", views.recipe_details, name="recipe_details"),
-    path("recipe_delete/<int:id>/", views.delete_recipe, name="delete_recipe")
+    path("recipe_delete/<int:id>/", views.delete_recipe, name="delete_recipe"),
+    path("search/<str:title>/", views.search, name="search")
 ]

@@ -20,7 +20,7 @@ User = get_user_model()
 def index(request):
     if request.user.is_authenticated:
         recipes = Recipe.objects.filter(user_id=request.user.id).order_by("title")
-        paginator = Paginator(recipes, 36)
+        paginator = Paginator(recipes, 24)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, "recipes/index.html", {
@@ -52,7 +52,7 @@ def register(request):
         return render(request, "recipes/register.html", {"form": form})
 
 
-
+@login_required
 def add_recipe(request):
     if request.method == "POST":
         f = RecipeForm(request.POST)
@@ -80,24 +80,6 @@ def my_recipes(request, user_id):
 
 
 @login_required
-def search(request):
-    if request.method == "POST":
-        search = request.POST["search"]
-        recipes = Recipe.objects.all()
-        filtered_recipes = []
-        for recipe in recipes:
-            if search.lower() in recipe.title.lower():
-                filtered_recipes.append(recipe)
-        paginator = Paginator(filtered_recipes, 4)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        # Maybe change this to be rendered by Javascript
-        return render(request, "recipes/my_recipes.html", {"page_obj": page_obj})
-
-def test(request):
-    return render(request, "recipes/test.html")
-
-
 def profile(request):
     if request.method == 'POST':
         form = EmailForm(request.POST)
@@ -116,6 +98,7 @@ def profile(request):
         })
 
 
+@login_required
 def email_change(request):
     if request.method == 'POST':
         form = EmailForm(request.POST)
@@ -136,8 +119,6 @@ def get_recipes(request):
     pass
 
 
-## Understand this thinggggg
-
 class CustomPasswordChangeView(PasswordChangeView):
     # Optional (default: 'registration/password_change_form.html')
     template_name = 'recipes/password_change.html'
@@ -150,6 +131,7 @@ class CustomPasswordChangeView(PasswordChangeView):
         return super().form_valid(form)
 
 
+@login_required
 def recipe_details(request, id):
     if request.method == 'POST':
         form = RecipeForm(request.POST)
@@ -170,8 +152,23 @@ def recipe_details(request, id):
         })
 
 
+@login_required
 def delete_recipe(request, id):
     recipe = Recipe.objects.get(id=id)
     recipe.delete()
     messages.info(request, f"Your recipe, {recipe.title}, has been deleted.")
     return redirect("index")
+
+
+@login_required
+def search(request, title):
+    serialized = []
+    recipes = Recipe.objects.all().order_by("title")
+    for recipe in recipes:
+        if title.lower() in recipe.title.lower():
+            recipe_details = {}
+            recipe_details["id"] = recipe.id
+            recipe_details["title"] = recipe.title
+            recipe_details["url"] = recipe.url
+            serialized.append(recipe_details)
+    return JsonResponse(serialized, safe=False)
