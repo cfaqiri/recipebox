@@ -17,14 +17,14 @@ Beyond the standard files that come built into a Django app and the html templat
 
 ### Distinctiveness and Complexity
 
-This project is not a social network (the primary goal is not to connect about something with other users), an it is not an ecommerce site either (no one is buying or selling anything). As a result, the project satisfies the distinctiveness requirement. 
+This project is not a social network (the primary goal is not to connect about something with other users), an it is not an ecommerce site either (no one is buying or selling anything). This project is about information storage. As a result, the project satisfies the distinctiveness requirement. 
 
 As for complexity, I've included a number features in this project that we had either not learned or not been required to include in previous projects. For example:
-- Learning about and implementing some of Django's built-in features, such as those that allow users to register, log in, log out, change password, and reset password. Whereas in the past, these were built for us, I structured these features myself in order to ensure that the user would have more stringent criteria to meet (more complicated passwords, for example).
+- Learning about and implementing some of Django's built-in features, such as those that allow users to register, log in, log out, change password, and reset password. Whereas in the past, some of these were built for us (like the login/logout), I structured these features myself in order to ensure that the user would have more stringent criteria to meet (more complicated passwords, for example). And so that they could change their password or reset it if they forgot. Super useful!
 - Using Django's messages framework to pass messages to the user, and this is supplemented by Bootstrap's alert framework to make them pretty
 - Using environment variables to keep secrets safe. For instance, for the password reset feature, I had to use my own email address as the sender and needed to give Django permission to log into my account. This username and password is kept safe from the source code. 
 - Leveraging bootstrap further (and on my own) to implement and customize a navbar, and use modals 
-- Deploying on Heroku. Now anyone in the world can access my app - no more ./manage.py runserver for me, yay! This was arguably the most difficult and unique aspect of my project and what sets it aside in terms of distinctiveness AND complexity. 
+- Deploying on Heroku. Now anyone in the world can access my app - none of that ./manage.py runserver for them, yay! This was arguably the most difficult and unique aspect of my project and what sets it aside in terms of distinctiveness AND complexity. 
 
 ## Getting Started
 
