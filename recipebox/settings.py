@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-aj*8lx&a4qk=q*^5j0)dj6jwuwtq@92a039ug=l2y8)cao2!z#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'myrecipeboxapp.herokuapp.com']
 
