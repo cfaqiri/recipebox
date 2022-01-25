@@ -34,7 +34,7 @@ Make sure to install the requirements.txt file if using this project locally.
 
 ### Installing
 
-Fork the project and enjoy!
+Fork the project and enjoy.
 
 ### Executing program
 
