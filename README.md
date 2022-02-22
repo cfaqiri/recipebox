@@ -44,4 +44,4 @@ You can either use the version deployed on Heroku at http://myrecipeboxapp.herok
 
 Contributors names and contact info
 
-ex. Crystal Faqiri - cfaqiri@gmail.com
+Crystal Faqiri - cfaqiri@gmail.com
