@@ -26,8 +26,7 @@ pip install -r requirements.txt
 ### Executing program locally
 
 - Make all migrations 
-```python manage.py migrate
-```
+```python manage.py migrate```
 - Run your local server
 ```python manage.py runserver```
 
