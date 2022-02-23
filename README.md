@@ -32,6 +32,4 @@ pip install -r requirements.txt
 
 ## Authors
 
-Contributors names and contact info
-
 Crystal Faqiri - cfaqiri@gmail.com
