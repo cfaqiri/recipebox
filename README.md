@@ -4,7 +4,7 @@ Keeping track of the links to recipes can get messy! Enter RecipeBox - a simple 
 
 ## Features
 
-RecipeBox's main two features include a user authentication system and a recipe storing system -- nothing fancy. Users are able to register, log in, log out, change password, reset password, add recipe urls, and search recipes. 
+RecipeBox's main two features include a user authentication system and a recipe storing system -- nothing fancy. Users are able to register, log in, log out, change password, reset password, add/delete recipe urls, and search recipes. 
 
 A video walkthrough of the features can be found [here](https://www.youtube.com/watch?v=iMb10NwLbOU&ab_channel=CrystalFaqiri).
 
